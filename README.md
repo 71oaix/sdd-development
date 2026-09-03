@@ -44,7 +44,7 @@ references/three-space-handoff-compatibility.md
 7. 创建版本标签；
 8. 再同步运行时安装副本。
 
-main 不直接提交。当前仓库尚未配置远程，配置前不得向未知地址推送。
+main 不直接提交。当前仓库已绑定 `https://github.com/71oaix/sdd-development`，后续只向该远程推送。
 
 ## 版本规则
 
@@ -59,5 +59,5 @@ main 不直接提交。当前仓库尚未配置远程，配置前不得向未知
 ## 当前状态
 
 - 本地 Git：已建立；
-- 远程 GitHub：待用户确认仓库名称和可见性；
+- 远程 GitHub：`https://github.com/71oaix/sdd-development`（Private）；
 - Handoff Contract：已接入 v0.1.0。
