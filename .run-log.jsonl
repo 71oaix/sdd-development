@@ -1,0 +1,1 @@
+{"ts":"2026-08-18T16:25:14+08:00","task":"完善 SDD skill：新增 issue 前置自检、description 改触发条件式、gotchas 统一三段式、加入自迭代机制","success":true,"findings":["新增 references/issue-precheck.md（双向钢人，可选前置自检）","description 重写为触发条件 + 关键词 + 反例","gotchas 统一为默认假设/实际规则/正确做法，新增 G007、G008","SKILL.md 增加自迭代规则与操作日志"]}
