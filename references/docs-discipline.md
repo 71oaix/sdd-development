@@ -26,5 +26,6 @@ type: reference
 - 遵循 doc-contract：frontmatter 必填 `title/status/created/updated`，状态只有 `active | archived`
 - 创建、修改、移动、归档文档后，必须同步更新 `docs/INDEX.md`
 - 文档互相链接（issue↔plan↔架构文档），模型更新时不易遗漏
+- 启用 Task Graph 时，issue / plan / graph / verification evidence 互相链接；只保留一个 Graph 状态真源，避免重复维护 blocker 和 status
 - 归档不删除：close/ 保留完整记录
 - **每个 plan 的步骤清单里必须含"更新相关文档"**——文档即交付物

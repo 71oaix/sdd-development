@@ -1,0 +1,24 @@
+{
+  "graph_id": "TG-YYYYMMDD-XXX",
+  "source": [
+    "SP-YYYYMMDD-XXX",
+    "ISSUE-XXX"
+  ],
+  "tickets": [
+    {
+      "id": "T-001",
+      "delivers": "用用户或 caller 可观察的语言描述一个完整能力切片",
+      "traces_to": [
+        "AC-001"
+      ],
+      "blocked_by": [],
+      "verification": [
+        "TEST-001 或明确的测试 / 检查 / 演示命令"
+      ],
+      "status": "draft",
+      "context_pointers": [
+        "Specification Package、issue、plan、research note 或 ADR 路径"
+      ]
+    }
+  ]
+}

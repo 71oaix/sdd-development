@@ -5,9 +5,12 @@
 ## 目录职责
 
 - SKILL.md：Skill 入口、触发边界和上游输入门；
-- references/：流程、交付协议、文档纪律和 handoff 兼容规则；
+- references/：流程、交付协议、文档纪律、Task Graph、Verification Review 和 Implementation Architecture 规则；
+- templates/task-graph.json：复杂任务的机器可检查 ticket 图模板；
+- templates/run-log-record.json / retrospective.md：结构化运行记录和周期性机制复盘模板；
+- scripts/validate_task_graph.py / validate_run_log.py：Task Graph 与运行日志的确定性检查；
 - gotchas.md：经过实际开发验证的踩坑规则；
-- .run-log.jsonl：Skill 自迭代操作日志，不注入默认上下文。
+- .run-log.jsonl：Skill 自迭代运行证据和机制复盘日志，不注入默认上下文。
 
 ## 使用关系
 
@@ -17,7 +20,7 @@ Problem → Intention → Specification → Solution Architecture
 
 sdd-development 负责：
 
-Approved Specification → Issue → Plan → Implementation → Verification → Delivery
+Approved Specification → Issue / Task Graph → Plan → Implementation → Verification → Delivery
 
 本目录是可编辑、可审阅、可回滚的源目录。运行时安装副本位于用户 Skill 目录。修改完成后，应先在本地完成检查，再同步安装副本并记录变更。
 

@@ -15,6 +15,8 @@ type: reference
 - 实现步骤拆分
 - 测试方案（如何验证）
 - 本次需要同步更新的文档清单
+- 如果启用 Task Graph：ticket 的 `delivers`、`traces_to`、`blocked_by`、`verification`、`status`，以及每条 blocker edge 的理由
+- 如果启用并行 trial：ready frontier、每个 worktree 的边界、integration branch、合并顺序和合并后验证
 
 ## 面向决策者的双层交付
 
@@ -34,6 +36,12 @@ type: reference
 | 目前未知 | “模型效果、成本、召回变化待验证” | 明确未知原因和下一步验证 |
 
 不得在没有测量的情况下写“显著提升”“完全解决”或具体百分比。
+
+## Traceability 与验证证据
+
+复杂任务必须能沿着 `Intention → Specification → Acceptance → Ticket → Test → Implementation / Commit → Verification Evidence` 回溯。简单任务可以把这些关系写在单一 issue / plan 中，不必另建 Graph 文件；启用 Graph 时，机器可检查的 ticket 清单是结构真源，issue / plan 只引用它，避免两份 blocker 状态漂移。
+
+每个 ticket 的验证证据至少记录：测试或检查命令、结果、执行时间或 commit、人工观察（如适用）、与 Acceptance ID 的关系。只有“实现完成”而没有“验证完成”的 ticket 不得解锁后继 ticket。
 
 ## 涉及 UI 的 plan 必须提供
 
