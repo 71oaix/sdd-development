@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import re
 from pathlib import Path
 
 
@@ -17,24 +18,24 @@ def tracked_files() -> list[Path]:
     return [Path(item) for item in result.stdout.decode("utf-8").split("\0") if item]
 
 
-def patterns() -> list[tuple[str, str]]:
+def patterns() -> list[tuple[re.Pattern[str], str]]:
     windows_user = "C:" + "\\" + "Users" + "\\"
-    github_token = "ghp" + "_"
-    github_pat = "github_pat" + "_"
-    private_key = "BEGIN " + "PRIVATE KEY"
-    openai_key = "sk" + "-"
+    github_token = re.escape("ghp" + "_") + r"[A-Za-z0-9]{20,}"
+    github_pat = re.escape("github_pat" + "_") + r"[A-Za-z0-9_]{20,}"
+    private_key = re.escape("BEGIN " + "PRIVATE KEY")
+    openai_key = re.escape("sk" + "-") + r"[A-Za-z0-9]{20,}"
     macos_user = "/" + "Users/"
     linux_user = "/" + "home/"
     root_home = "/" + "root/"
     return [
-        (windows_user, "Windows user path"),
-        (macos_user, "macOS user path"),
-        (linux_user, "Linux user path"),
-        (root_home, "root home path"),
-        (github_token, "GitHub token prefix"),
-        (github_pat, "GitHub fine-grained token prefix"),
-        (private_key, "private key marker"),
-        (openai_key, "API key prefix"),
+        (re.compile(re.escape(windows_user)), "Windows user path"),
+        (re.compile(re.escape(macos_user)), "macOS user path"),
+        (re.compile(re.escape(linux_user)), "Linux user path"),
+        (re.compile(re.escape(root_home)), "root home path"),
+        (re.compile(github_token), "GitHub token prefix"),
+        (re.compile(github_pat), "GitHub fine-grained token prefix"),
+        (re.compile(private_key), "private key marker"),
+        (re.compile(openai_key), "API key prefix"),
     ]
 
 
@@ -46,7 +47,7 @@ def main() -> int:
         except (UnicodeDecodeError, OSError):
             continue
         for needle, label in patterns():
-            if needle in text:
+            if needle.search(text):
                 findings.append(f"{path}: {label}")
     if findings:
         for finding in findings:
