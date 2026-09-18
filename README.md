@@ -19,7 +19,7 @@ sdd-development 负责：
 
 Approved Specification → Issue → Plan → Implementation → Verification → Delivery
 
-本目录是可编辑、可审阅、可回滚的源目录。运行时安装副本位于用户 Skill 目录。修改完成后，应先在本地完成检查，再同步安装副本并记录变更。
+本目录是可编辑、可审阅、可回滚的源目录。运行时安装副本位于 Codex 的用户技能目录。修改完成后，应先在本地完成检查，再同步安装副本并记录变更。
 
 ## 跨 Skill 契约
 
@@ -32,6 +32,14 @@ references/three-space-handoff-compatibility.md
 支持的契约版本：
 
 0.1.0
+
+## 公开仓库治理
+
+- 本仓库是公开的 SDD 执行技能源仓库；`main` 只接受通过 PR 和 CI 的变更；
+- 本仓库只消费 `three-space-development` 定义的 SDD Handoff Contract，不重新定义上游规格；
+- 本仓库是可编辑源，Codex 用户技能目录中的副本是安装产物；
+- 不直接编辑运行时副本，也不把项目内旧副本当作维护源；
+- 涉及契约兼容性的 PR 必须说明支持的契约版本和对上游的影响。
 
 ## GitHub 更新流程
 
@@ -59,5 +67,5 @@ main 不直接提交。当前仓库已绑定 `https://github.com/71oaix/sdd-deve
 ## 当前状态
 
 - 本地 Git：已建立；
-- 远程 GitHub：`https://github.com/71oaix/sdd-development`（Private）；
+- 远程 GitHub：`https://github.com/71oaix/sdd-development`（Public）；
 - Handoff Contract：已接入 v0.1.0。
