@@ -1,0 +1,55 @@
+name: sdd-quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  sdd-quality:
+    name: sdd-quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validation scripts
+        run: python -m compileall -q scripts
+
+      - name: Validate JSONL run-log syntax
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('.run-log.jsonl')
+          records = [line for line in path.read_text(encoding='utf-8').splitlines() if line.strip()]
+          if not records:
+              raise SystemExit('.run-log.jsonl is empty')
+          for line_number, line in enumerate(records, start=1):
+              try:
+                  json.loads(line)
+              except json.JSONDecodeError as exc:
+                  raise SystemExit(f'.run-log.jsonl line {line_number}: {exc}') from exc
+          print(f'OK: parsed {len(records)} run-log records')
+          PY
+
+      - name: Validate Task Graph template when available
+        if: ${{ hashFiles('scripts/validate_task_graph.py') != '' && hashFiles('templates/task-graph.json') != '' }}
+        run: python scripts/validate_task_graph.py templates/task-graph.json
+
+      - name: Validate structured run log when available
+        if: ${{ hashFiles('scripts/validate_run_log.py') != '' }}
+        run: python scripts/validate_run_log.py .run-log.jsonl
+
+      - name: Validate public surface
+        run: python scripts/validate_public_surface.py
