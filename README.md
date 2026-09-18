@@ -62,5 +62,5 @@ main 不直接提交。当前仓库已绑定 `https://github.com/71oaix/sdd-deve
 ## 当前状态
 
 - 本地 Git：已建立；
-- 远程 GitHub：`https://github.com/71oaix/sdd-development`（Private）；
+- 远程 GitHub：`https://github.com/71oaix/sdd-development`（Public）；
 - Handoff Contract：已接入 v0.1.0。
